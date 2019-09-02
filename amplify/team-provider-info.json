@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "mapsync-dev-20190901020138-authRole",
+            "UnauthRoleArn": "arn:aws:iam::758271268867:role/mapsync-dev-20190901020138-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::758271268867:role/mapsync-dev-20190901020138-authRole",
+            "Region": "ap-northeast-2",
+            "DeploymentBucketName": "mapsync-dev-20190901020138-deployment",
+            "UnauthRoleName": "mapsync-dev-20190901020138-unauthRole",
+            "StackName": "mapsync-dev-20190901020138",
+            "StackId": "arn:aws:cloudformation:ap-northeast-2:758271268867:stack/mapsync-dev-20190901020138/ff587100-cc10-11e9-a36b-028a2aa6e0a8"
+        }
+    }
+}

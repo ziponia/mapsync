@@ -1,0 +1,186 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Chatting {
+  autor: String
+  createdAt: String
+  id: ID!
+  message: String
+}
+
+type ChattingConnection {
+  items: [Chatting]
+  nextToken: String
+}
+
+type Mutation {
+  createChatting(input: CreateChattingInput!): Chatting
+  createPoint(input: CreatePointInput!): Point
+  deleteChatting(input: DeleteChattingInput!): Chatting
+  deletePoint(input: DeletePointInput!): Point
+  pointOnEvent(createdAt: String, lat: Float!, lng: Float!): Point
+  updateChatting(input: UpdateChattingInput!): Chatting
+  updatePoint(input: UpdatePointInput!): Point
+}
+
+type Point {
+  createdAt: String
+  lat: Float
+  lng: Float
+  pointId: ID!
+}
+
+type PointConnection {
+  items: [Point]
+  nextToken: String
+}
+
+type Query {
+  findAllPoint: [Point]
+  getChatting(id: ID!): Chatting
+  getPoint(pointId: ID!): Point
+  listChattings(
+    filter: TableChattingFilterInput
+    limit: Int
+    nextToken: String
+  ): ChattingConnection
+  listPoints(
+    filter: TablePointFilterInput
+    limit: Int
+    nextToken: String
+  ): PointConnection
+}
+
+type Subscription {
+  onCreateChatting(
+    autor: String
+    createdAt: String
+    id: ID
+    message: String
+  ): Chatting @aws_subscribe(mutations: ["createChatting"])
+  onCreatePoint(createdAt: String, lat: Float, lng: Float, pointId: ID): Point
+    @aws_subscribe(mutations: ["createPoint"])
+  onDeleteChatting(
+    autor: String
+    createdAt: String
+    id: ID
+    message: String
+  ): Chatting @aws_subscribe(mutations: ["deleteChatting"])
+  onDeletePoint(createdAt: String, lat: Float, lng: Float, pointId: ID): Point
+    @aws_subscribe(mutations: ["deletePoint"])
+  onUpdateChatting(
+    autor: String
+    createdAt: String
+    id: ID
+    message: String
+  ): Chatting @aws_subscribe(mutations: ["updateChatting"])
+  onUpdatePoint(createdAt: String, lat: Float, lng: Float, pointId: ID): Point
+    @aws_subscribe(mutations: ["updatePoint"])
+  subscribeMap: Point @aws_subscribe(mutations: ["pointOnEvent"])
+}
+
+input CreateChattingInput {
+  autor: String
+  createdAt: String
+  message: String
+}
+
+input CreatePointInput {
+  createdAt: String
+  lat: Float
+  lng: Float
+}
+
+input DeleteChattingInput {
+  id: ID!
+}
+
+input DeletePointInput {
+  pointId: ID!
+}
+
+input TableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input TableChattingFilterInput {
+  autor: TableStringFilterInput
+  createdAt: TableIntFilterInput
+  id: TableIDFilterInput
+  message: TableStringFilterInput
+}
+
+input TableFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input TableIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+}
+
+input TableIntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
+}
+
+input TablePointFilterInput {
+  createdAt: TableStringFilterInput
+  lat: TableFloatFilterInput
+  lng: TableFloatFilterInput
+  pointId: TableIDFilterInput
+}
+
+input TableStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
+
+input UpdateChattingInput {
+  autor: String
+  createdAt: String
+  id: ID!
+  message: String
+}
+
+input UpdatePointInput {
+  createdAt: String
+  lat: Float
+  lng: Float
+  pointId: ID!
+}
